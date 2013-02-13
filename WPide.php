@@ -204,7 +204,7 @@ class wpide
 	public static function jqueryFileTree_get_list() {
 		//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
 		//setup wp_filesystem api
@@ -257,7 +257,7 @@ class wpide
 	public static function wpide_get_file() {
 		//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
 		//setup wp_filesystem api
@@ -282,7 +282,7 @@ class wpide
     public function show_changed_files() {
 		//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
         error_reporting(E_ALL);
@@ -360,7 +360,7 @@ class wpide
 	public static function show_diff() {
     	//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
         error_reporting(E_ALL);
@@ -414,7 +414,7 @@ class wpide
     public static function git_commit() {
     	//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
         error_reporting(E_ALL);
@@ -466,7 +466,7 @@ class wpide
 		
 		//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
 		//create a nonce based on the image path
@@ -477,7 +477,7 @@ class wpide
 	public static function wpide_create_new() {
 		//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
 		//setup wp_filesystem api
@@ -539,7 +539,7 @@ class wpide
 	public static function wpide_save_file() {
 		//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 		wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
         
         $is_php = false;
@@ -638,7 +638,7 @@ class wpide
 				die('Security check'); //die because both checks failed
 			}
 			//check the user has the permissions
-			if ( !current_user_can('edit_themes') )
+			if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
 	
@@ -704,7 +704,7 @@ class wpide
 		
     	//check the user has the permissions
 		check_admin_referer('plugin-name-action_wpidenonce'); 
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 			wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
             
         if ( defined( 'WPIDE_FS_METHOD_FORCED_ELSEWHERE' ) ){
@@ -784,11 +784,11 @@ class wpide
 	
 	public function add_my_menu_page() {
 		//add_menu_page("wpide", "wpide","edit_themes", "wpidesettings", array( &$this, 'my_menu_page') );
-		add_menu_page('WPide', 'WPide', 'edit_themes', "wpide", array( &$this, 'my_menu_page' ));
+		add_menu_page('WPide', 'WPide', 'manage_network_themes', "wpide", array( &$this, 'my_menu_page' ));
 	}
 	
 	public function my_menu_page() {
-		if ( !current_user_can('edit_themes') )
+		if ( !is_super_admin() )
 		wp_die('<p>'.__('You do not have sufficient permissions to edit templates for this site. SORRY').'</p>');
 		
 		$app_url = get_bloginfo('url'); //need to make this https if we are currently looking on the site using https (even though https for admin might not be forced it can still cause issues)
