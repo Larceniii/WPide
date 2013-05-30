@@ -232,6 +232,7 @@ class wpide
 			if( count($files) > 0 ) { 
 				
 				// All dirs
+				asort($files); // Sort Files and folders by php case-sensitive Alpha
 				foreach( $files as $file => $file_info ) {
 					if( $file != '.' && $file != '..' && $file_info['type']=='d' ) {
 						echo "<li class=\"directory collapsed\"><a href=\"#\" rel=\"" . htmlentities($_POST['dir'] . $file) . "/\">" . htmlentities($file) . "</a></li>";
