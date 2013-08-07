@@ -953,6 +953,7 @@ class wpide
         if( $wp_filesystem->exists( $root ) ){
             
             $files = $wp_filesystem->dirlist( $root );
+            asort($files);
             if ( count($files) > 0){
                 echo "wp-content folder exists and contains ". count($files) ." files \n";
             }else{
